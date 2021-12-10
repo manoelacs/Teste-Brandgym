@@ -10,31 +10,20 @@ import * as S from "./styles";
 const FormQuestions = () => {
   const [questions, setQuestions] = useState<any>([]);
   const [data, setData] = useState<any>([]);
-  const [theme, setTheme] = useState({});
 
   const { id } = useParams();
-
-  const mockQuestions = mockData.questions;
 
   useEffect(() => {
     if (id) {
       getQuestions(id)
         .then((res) => {
-          console.log(res.status);
-          console.log(mockData);
-          if (res.status === 404) {
-            setData(mockData);
-            setQuestions(mockData.questions as any[]);
-          } else {
-            let data = res.data as any[];
-            setData(data);
-            setQuestions(res.data.questions as any[]);
-          }
+          let data = res.data as any[];
+          setData(data);
+          setQuestions(res.data.questions as any[]);
         })
         .catch((err) => {
           console.log(err);
           const { questions } = mockData;
-          console.log(mockData, questions);
           setQuestions(questions);
         });
     }
@@ -47,7 +36,7 @@ const FormQuestions = () => {
         {questions.length > 0 ? (
           <Formulary questions={questions} />
         ) : (
-          <div> Tivemos um problema </div>
+          <div> Carregando... </div>
         )}
       </Container>
     </>
