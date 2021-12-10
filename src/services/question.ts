@@ -1,12 +1,11 @@
 import api from "./api";
 
-interface IQuestions {
-  options: [
-    {
-      id: string;
-      text: string;
-    }
-  ];
+export interface IResponse {
+  id: string;
+  text?: string;
+}
+export interface IQuestions {
+  options: IResponse[];
 }
 
 export const getQuestions = (id: string | undefined) => {
